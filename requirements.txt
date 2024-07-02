@@ -5,6 +5,7 @@ pydeck==0.8.0
 streamlit==1.28.1
 joblib==1.3.2
 matplotlib==3.7.1
+scikit-learn==1.2.2
 
 # Trigger redeployment
 # Another comment to trigger redeployment
