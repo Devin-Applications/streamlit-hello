@@ -1,4 +1,10 @@
 import pandas as pd
+# One-hot encode categorical variables
+
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 # Copyright 2018-2022 Streamlit Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -118,14 +124,20 @@ def run():
         features = pd.DataFrame(data, index=[0])
         return features
 
+    # Upload CSV file or use default example file
     uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
     if uploaded_file is not None:
         input_df = pd.read_csv(uploaded_file)
     else:
         input_df = pd.read_csv('/home/ubuntu/streamlit-hello/penguins_example.csv')
 
-    # One-hot encode categorical variables
-    input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
+    # Ensure input_df has the correct number of features
+    expected_features = ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4']
+    missing_features = [feature for feature in expected_features if feature not in input_df.columns]
+    if missing_features:
+        st.error(f"The following expected features are missing from the input data: {', '.join(missing_features)}")
+    else:
+        input_df = input_df[expected_features]
 
     # Displays the user input features
     st.subheader('User Input features')
@@ -134,6 +146,7 @@ def run():
     # Apply model to make predictions
     if model is not None:
         try:
+            # Make predictions
             prediction = model.predict(input_df)
             prediction_proba = model.predict_proba(input_df)
 
@@ -154,7 +167,7 @@ def run():
             st.pyplot(fig)
         except Exception as e:
             LOGGER.error(f"Error during prediction: {e}")
-            st.error("An error occurred during prediction. Please check the input data and try again.")
+            st.error(f"An error occurred during prediction: {e}")
     else:
         st.error("Model is not loaded. Predictions cannot be made.")
 
