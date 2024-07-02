@@ -21,8 +21,15 @@ import matplotlib.pyplot as plt
 
 LOGGER = get_logger(__name__)
 
+# Set page configuration
+st.set_page_config(
+    page_title="Predictive Analytics App",
+    page_icon="📊",
+)
+
 # Load pre-trained model
 try:
+    LOGGER.info("Attempting to load the model from 'model.pkl'.")
     model = joblib.load('model.pkl')
     LOGGER.info("Model loaded successfully.")
 except FileNotFoundError as e:
@@ -33,11 +40,6 @@ except Exception as e:
     st.error("An error occurred while loading the model.")
 
 def run():
-    st.set_page_config(
-        page_title="Predictive Analytics App",
-        page_icon="📊",
-    )
-
     st.write("# Predictive Analytics App 📊")
 
     st.sidebar.header("User Input Features")
@@ -97,3 +99,5 @@ def run():
 
 if __name__ == "__main__":
     run()
+
+# Trivial change to trigger redeployment
