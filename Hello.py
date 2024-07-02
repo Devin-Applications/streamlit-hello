@@ -60,6 +60,14 @@ def run():
     else:
         input_df = pd.read_csv('/home/ubuntu/streamlit-hello/penguins_example.csv')
 
+    # Map and rename columns to match expected feature names
+    input_df = input_df.rename(columns={
+        'bill_length_mm': 'Feature 1',
+        'bill_depth_mm': 'Feature 2',
+        'flipper_length_mm': 'Feature 3',
+        'body_mass_g': 'Feature 4'
+    })
+
     # Ensure input_df has the correct number of features
     expected_features = ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4']
     missing_features = [feature for feature in expected_features if feature not in input_df.columns]
