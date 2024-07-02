@@ -28,3 +28,10 @@ Traceback (most recent call last):
   File "/home/ubuntu/streamlit-hello/Hello.py", line 34, in <module>
     input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
 NameError: name 'input_df' is not defined
+2024-07-02 21:35:40.443 Uncaught app exception
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 534, in _run_script
+    exec(code, module.__dict__)
+  File "/home/ubuntu/streamlit-hello/Hello.py", line 34, in <module>
+    input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
+NameError: name 'input_df' is not defined

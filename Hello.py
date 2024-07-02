@@ -31,7 +31,6 @@ import pandas as pd
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # One-hot encode categorical variables
-input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
 
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
