@@ -1,3 +1,4 @@
+import pandas as pd
 # Copyright 2018-2022 Streamlit Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -8,6 +9,30 @@
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Copyright 2018-2022 Streamlit Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+# Copyright 2018-2022 Streamlit Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# One-hot encode categorical variables
+input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
+
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -78,30 +103,30 @@ def run():
     """)
 
     # Collects user input features into dataframe
-    uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
-    if uploaded_file is not None:
-        input_df = pd.read_csv(uploaded_file)
-    else:
-        def user_input_features():
-            feature1 = st.sidebar.number_input('Feature 1', min_value=0.0, max_value=100.0, value=50.0)
-            feature2 = st.sidebar.number_input('Feature 2', min_value=0.0, max_value=100.0, value=50.0)
-            feature3 = st.sidebar.number_input('Feature 3', min_value=0.0, max_value=100.0, value=50.0)
-            feature4 = st.sidebar.number_input('Feature 4', min_value=0.0, max_value=100.0, value=50.0)
-            data = {'Feature 1': feature1,
-                    'Feature 2': feature2,
-                    'Feature 3': feature3,
-                    'Feature 4': feature4}
-            features = pd.DataFrame(data, index=[0])
-            return features
-        input_df = user_input_features()
+    # uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
+    # if uploaded_file is not None:
+    #     input_df = pd.read_csv(uploaded_file)
+    # else:
+    def user_input_features():
+        feature1 = st.sidebar.number_input('Feature 1', min_value=0.0, max_value=100.0, value=50.0)
+        feature2 = st.sidebar.number_input('Feature 2', min_value=0.0, max_value=100.0, value=50.0)
+        feature3 = st.sidebar.number_input('Feature 3', min_value=0.0, max_value=100.0, value=50.0)
+        feature4 = st.sidebar.number_input('Feature 4', min_value=0.0, max_value=100.0, value=50.0)
+        data = {'Feature 1': feature1,
+                'Feature 2': feature2,
+                'Feature 3': feature3,
+                'Feature 4': feature4}
+        features = pd.DataFrame(data, index=[0])
+        return features
+
+    input_df = pd.read_csv('/home/ubuntu/streamlit-hello/penguins_example.csv')
+
+    # One-hot encode categorical variables
+    input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
 
     # Displays the user input features
     st.subheader('User Input features')
-    if uploaded_file is not None:
-        st.write(input_df)
-    else:
-        st.write('Awaiting CSV file to be uploaded. Currently using example input parameters (shown below).')
-        st.write(input_df)
+    st.write(input_df)
 
     # Apply model to make predictions
     if model is not None:
