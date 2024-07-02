@@ -51,6 +51,17 @@ def run():
     # Encode categorical variables
     input_df = pd.get_dummies(input_df, columns=['island', 'sex'], drop_first=True)
 
+    # Ensure all expected categories are present in the encoded data
+    expected_categories = {
+        'island': ['Biscoe', 'Dream', 'Torgersen'],
+        'sex': ['male', 'female']
+    }
+    for column, categories in expected_categories.items():
+        for category in categories:
+            col_name = f"{column}_{category}"
+            if col_name not in input_df.columns:
+                input_df[col_name] = 0
+
     # Map and rename columns to match expected feature names
     input_df = input_df.rename(columns={
         'bill_length_mm': 'Feature 1',
@@ -60,13 +71,8 @@ def run():
     })
 
     # Ensure input_df has the correct number of features after encoding
-    expected_features_after_encoding = ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4', 'island_Biscoe', 'sex_male']
-    missing_features_after_encoding = [feature for feature in expected_features_after_encoding if feature not in input_df.columns]
-    if missing_features_after_encoding:
-        st.error(f"The following expected features are missing from the input data after encoding: {', '.join(missing_features_after_encoding)}")
-        return
-    else:
-        input_df = input_df[expected_features_after_encoding]
+    expected_features_after_encoding = ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4']
+    input_df = input_df[expected_features_after_encoding]
 
     # Displays the user input features
     st.subheader('User Input features')
