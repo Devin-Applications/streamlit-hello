@@ -1,0 +1,53 @@
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to False.
+
+
+  You can now view your Streamlit app in your browser.
+
+  Network URL: http://10.241.194.197:8501
+  External URL: http://52.12.55.86:8501
+
+2024-07-02 21:28:03.735 Uncaught app exception
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 534, in _run_script
+    exec(code, module.__dict__)
+  File "/home/ubuntu/streamlit-hello/Hello.py", line 34, in <module>
+    input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
+NameError: name 'input_df' is not defined
+2024-07-02 21:28:38.531 Uncaught app exception
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 534, in _run_script
+    exec(code, module.__dict__)
+  File "/home/ubuntu/streamlit-hello/Hello.py", line 34, in <module>
+    input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
+NameError: name 'input_df' is not defined
+2024-07-02 21:30:53.112 Uncaught app exception
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 534, in _run_script
+    exec(code, module.__dict__)
+  File "/home/ubuntu/streamlit-hello/Hello.py", line 34, in <module>
+    input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
+NameError: name 'input_df' is not defined
+2024-07-02 21:35:40.443 Uncaught app exception
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 534, in _run_script
+    exec(code, module.__dict__)
+  File "/home/ubuntu/streamlit-hello/Hello.py", line 34, in <module>
+    input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
+NameError: name 'input_df' is not defined
+2024-07-02 21:38:29.359 Dummy model created successfully.
+2024-07-02 21:38:29.359 model.pkl file is present in the directory.
+2024-07-02 21:38:29.359 Attempting to load the model from 'model.pkl'.
+2024-07-02 21:38:30.044 Model loaded successfully.
+/home/ubuntu/.local/lib/python3.10/site-packages/sklearn/base.py:486: UserWarning: X has feature names, but RandomForestClassifier was fitted without feature names
+  warnings.warn(
+2024-07-02 21:38:30.063 Error during prediction: X has 6 features, but RandomForestClassifier is expecting 4 features as input.
+2024-07-02 21:50:54.281 Dummy model created successfully.
+2024-07-02 21:50:54.281 model.pkl file is present in the directory.
+2024-07-02 21:50:54.282 Attempting to load the model from 'model.pkl'.
+2024-07-02 21:50:54.328 Model loaded successfully.
+2024-07-02 22:16:28.043 Attempting to load the model from 'model.pkl'.
+2024-07-02 22:16:28.158 Model loaded successfully.
+/home/ubuntu/.local/lib/python3.10/site-packages/sklearn/base.py:486: UserWarning: X has feature names, but RandomForestClassifier was fitted without feature names
+  warnings.warn(
+2024-07-02 22:16:28.175 Error during prediction: could not convert string to float: 'Biscoe'
