@@ -35,3 +35,14 @@ Traceback (most recent call last):
   File "/home/ubuntu/streamlit-hello/Hello.py", line 34, in <module>
     input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
 NameError: name 'input_df' is not defined
+2024-07-02 21:38:29.359 Dummy model created successfully.
+2024-07-02 21:38:29.359 model.pkl file is present in the directory.
+2024-07-02 21:38:29.359 Attempting to load the model from 'model.pkl'.
+2024-07-02 21:38:30.044 Model loaded successfully.
+/home/ubuntu/.local/lib/python3.10/site-packages/sklearn/base.py:486: UserWarning: X has feature names, but RandomForestClassifier was fitted without feature names
+  warnings.warn(
+2024-07-02 21:38:30.063 Error during prediction: X has 6 features, but RandomForestClassifier is expecting 4 features as input.
+2024-07-02 21:50:54.281 Dummy model created successfully.
+2024-07-02 21:50:54.281 model.pkl file is present in the directory.
+2024-07-02 21:50:54.282 Attempting to load the model from 'model.pkl'.
+2024-07-02 21:50:54.328 Model loaded successfully.
