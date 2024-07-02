@@ -15,3 +15,4 @@ scikit-learn==1.4.0
 # Trigger redeployment one more time
 # Trigger redeployment yet again
 # Trigger redeployment one more time again
+# Trigger redeployment to ensure scikit-learn version 1.4.0 is used
