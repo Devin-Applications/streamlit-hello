@@ -51,3 +51,22 @@ NameError: name 'input_df' is not defined
 /home/ubuntu/.local/lib/python3.10/site-packages/sklearn/base.py:486: UserWarning: X has feature names, but RandomForestClassifier was fitted without feature names
   warnings.warn(
 2024-07-02 22:16:28.175 Error during prediction: could not convert string to float: 'Biscoe'
+2024-07-02 23:00:24.678 Attempting to load the model from 'model.pkl'.
+2024-07-02 23:00:24.796 Model loaded successfully.
+2024-07-02 23:00:24.811 Uncaught app exception
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 534, in _run_script
+    exec(code, module.__dict__)
+  File "/home/ubuntu/streamlit-hello/Hello.py", line 110, in <module>
+    run()
+  File "/home/ubuntu/streamlit-hello/Hello.py", line 65, in run
+    input_df = pd.get_dummies(input_df, columns=['island', 'sex'], drop_first=True)
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/pandas/core/reshape/encoding.py", line 164, in get_dummies
+    data_to_encode = data[columns]
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/pandas/core/frame.py", line 3899, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 6114, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 6175, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['island', 'sex'], dtype='object')] are in the [columns]"
