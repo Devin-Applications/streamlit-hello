@@ -22,7 +22,15 @@ import matplotlib.pyplot as plt
 LOGGER = get_logger(__name__)
 
 # Load pre-trained model
-model = joblib.load('model.pkl')
+try:
+    model = joblib.load('model.pkl')
+    LOGGER.info("Model loaded successfully.")
+except FileNotFoundError as e:
+    LOGGER.error(f"Model file not found: {e}")
+    st.error("Model file not found. Please ensure 'model.pkl' is present in the directory.")
+except Exception as e:
+    LOGGER.error(f"Error loading model: {e}")
+    st.error("An error occurred while loading the model.")
 
 def run():
     st.set_page_config(
@@ -64,24 +72,28 @@ def run():
         st.write(input_df)
 
     # Apply model to make predictions
-    prediction = model.predict(input_df)
-    prediction_proba = model.predict_proba(input_df)
+    try:
+        prediction = model.predict(input_df)
+        prediction_proba = model.predict_proba(input_df)
 
-    st.subheader('Prediction')
-    st.write(prediction)
+        st.subheader('Prediction')
+        st.write(prediction)
 
-    st.subheader('Prediction Probability')
-    st.write(prediction_proba)
+        st.subheader('Prediction Probability')
+        st.write(prediction_proba)
 
-    # Visualize prediction confidence
-    st.subheader('Prediction Confidence Visualization')
-    fig, ax = plt.subplots()
-    ax.barh(np.arange(len(prediction_proba[0])), prediction_proba[0])
-    ax.set_yticks(np.arange(len(prediction_proba[0])))
-    ax.set_yticklabels(['Class 1', 'Class 2'])
-    ax.set_xlabel('Probability')
-    ax.set_title('Prediction Confidence')
-    st.pyplot(fig)
+        # Visualize prediction confidence
+        st.subheader('Prediction Confidence Visualization')
+        fig, ax = plt.subplots()
+        ax.barh(np.arange(len(prediction_proba[0])), prediction_proba[0])
+        ax.set_yticks(np.arange(len(prediction_proba[0])))
+        ax.set_yticklabels(['Class 1', 'Class 2'])
+        ax.set_xlabel('Probability')
+        ax.set_title('Prediction Confidence')
+        st.pyplot(fig)
+    except Exception as e:
+        LOGGER.error(f"Error during prediction: {e}")
+        st.error("An error occurred during prediction. Please check the input data and try again.")
 
 if __name__ == "__main__":
     run()
