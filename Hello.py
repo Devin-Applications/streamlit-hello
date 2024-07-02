@@ -29,6 +29,7 @@ st.set_page_config(
 
 # Load pre-trained model
 try:
+    LOGGER.info("Attempting to load the model from 'model.pkl'.")
     model = joblib.load('model.pkl')
     LOGGER.info("Model loaded successfully.")
 except FileNotFoundError as e:
