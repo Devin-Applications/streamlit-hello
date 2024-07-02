@@ -18,6 +18,7 @@ import pandas as pd
 import numpy as np
 import joblib
 import matplotlib.pyplot as plt
+import subprocess
 
 LOGGER = get_logger(__name__)
 
@@ -26,6 +27,14 @@ st.set_page_config(
     page_title="Predictive Analytics App",
     page_icon="📊",
 )
+
+# Run the create_dummy_model.py script to regenerate the model.pkl file
+try:
+    subprocess.run(["python3", "create_dummy_model.py"], check=True)
+    LOGGER.info("Dummy model created successfully.")
+except subprocess.CalledProcessError as e:
+    LOGGER.error(f"Error creating dummy model: {e}")
+    st.error(f"An error occurred while creating the dummy model: {e}")
 
 # Load pre-trained model
 model = None
