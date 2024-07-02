@@ -21,6 +21,12 @@ import matplotlib.pyplot as plt
 
 LOGGER = get_logger(__name__)
 
+# Set page configuration
+st.set_page_config(
+    page_title="Predictive Analytics App",
+    page_icon="📊",
+)
+
 # Load pre-trained model
 try:
     model = joblib.load('model.pkl')
@@ -33,11 +39,6 @@ except Exception as e:
     st.error("An error occurred while loading the model.")
 
 def run():
-    st.set_page_config(
-        page_title="Predictive Analytics App",
-        page_icon="📊",
-    )
-
     st.write("# Predictive Analytics App 📊")
 
     st.sidebar.header("User Input Features")
