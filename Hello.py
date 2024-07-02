@@ -28,6 +28,7 @@ st.set_page_config(
 )
 
 # Load pre-trained model
+model = None
 try:
     LOGGER.info("Attempting to load the model from 'model.pkl'.")
     model = joblib.load('model.pkl')
@@ -74,28 +75,31 @@ def run():
         st.write(input_df)
 
     # Apply model to make predictions
-    try:
-        prediction = model.predict(input_df)
-        prediction_proba = model.predict_proba(input_df)
+    if model is not None:
+        try:
+            prediction = model.predict(input_df)
+            prediction_proba = model.predict_proba(input_df)
 
-        st.subheader('Prediction')
-        st.write(prediction)
+            st.subheader('Prediction')
+            st.write(prediction)
 
-        st.subheader('Prediction Probability')
-        st.write(prediction_proba)
+            st.subheader('Prediction Probability')
+            st.write(prediction_proba)
 
-        # Visualize prediction confidence
-        st.subheader('Prediction Confidence Visualization')
-        fig, ax = plt.subplots()
-        ax.barh(np.arange(len(prediction_proba[0])), prediction_proba[0])
-        ax.set_yticks(np.arange(len(prediction_proba[0])))
-        ax.set_yticklabels(['Class 1', 'Class 2'])
-        ax.set_xlabel('Probability')
-        ax.set_title('Prediction Confidence')
-        st.pyplot(fig)
-    except Exception as e:
-        LOGGER.error(f"Error during prediction: {e}")
-        st.error("An error occurred during prediction. Please check the input data and try again.")
+            # Visualize prediction confidence
+            st.subheader('Prediction Confidence Visualization')
+            fig, ax = plt.subplots()
+            ax.barh(np.arange(len(prediction_proba[0])), prediction_proba[0])
+            ax.set_yticks(np.arange(len(prediction_proba[0])))
+            ax.set_yticklabels(['Class 1', 'Class 2'])
+            ax.set_xlabel('Probability')
+            ax.set_title('Prediction Confidence')
+            st.pyplot(fig)
+        except Exception as e:
+            LOGGER.error(f"Error during prediction: {e}")
+            st.error("An error occurred during prediction. Please check the input data and try again.")
+    else:
+        st.error("Model is not loaded. Predictions cannot be made.")
 
 if __name__ == "__main__":
     run()
