@@ -60,53 +60,57 @@ def run():
     else:
         input_df = pd.read_csv('/home/ubuntu/streamlit-hello/penguins_example.csv')
 
-    # Map and rename columns to match expected feature names
-    input_df = input_df.rename(columns={
-        'bill_length_mm': 'Feature 1',
-        'bill_depth_mm': 'Feature 2',
-        'flipper_length_mm': 'Feature 3',
-        'body_mass_g': 'Feature 4'
-    })
+    # Ensure input_df is defined before using it
+    if 'input_df' in locals():
+        # Map and rename columns to match expected feature names
+        input_df = input_df.rename(columns={
+            'bill_length_mm': 'Feature 1',
+            'bill_depth_mm': 'Feature 2',
+            'flipper_length_mm': 'Feature 3',
+            'body_mass_g': 'Feature 4'
+        })
 
-    # Ensure input_df has the correct number of features
-    expected_features = ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4']
-    missing_features = [feature for feature in expected_features if feature not in input_df.columns]
-    if missing_features:
-        st.error(f"The following expected features are missing from the input data: {', '.join(missing_features)}")
+        # Ensure input_df has the correct number of features
+        expected_features = ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4']
+        missing_features = [feature for feature in expected_features if feature not in input_df.columns]
+        if missing_features:
+            st.error(f"The following expected features are missing from the input data: {', '.join(missing_features)}")
+        else:
+            input_df = input_df[expected_features]
+
+        # Displays the user input features
+        st.subheader('User Input features')
+        st.write(input_df)
+
+        # Apply model to make predictions
+        if model is not None:
+            try:
+                # Make predictions
+                prediction = model.predict(input_df)
+                prediction_proba = model.predict_proba(input_df)
+
+                st.subheader('Prediction')
+                st.write(prediction)
+
+                st.subheader('Prediction Probability')
+                st.write(prediction_proba)
+
+                # Visualize prediction confidence
+                st.subheader('Prediction Confidence Visualization')
+                fig, ax = plt.subplots()
+                ax.barh(np.arange(len(prediction_proba[0])), prediction_proba[0])
+                ax.set_yticks(np.arange(len(prediction_proba[0])))
+                ax.set_yticklabels(['Class 1', 'Class 2'])
+                ax.set_xlabel('Probability')
+                ax.set_title('Prediction Confidence')
+                st.pyplot(fig)
+            except Exception as e:
+                LOGGER.error(f"Error during prediction: {e}")
+                st.error(f"An error occurred during prediction: {e}")
+        else:
+            st.error("Model is not loaded. Predictions cannot be made.")
     else:
-        input_df = input_df[expected_features]
-
-    # Displays the user input features
-    st.subheader('User Input features')
-    st.write(input_df)
-
-    # Apply model to make predictions
-    if model is not None:
-        try:
-            # Make predictions
-            prediction = model.predict(input_df)
-            prediction_proba = model.predict_proba(input_df)
-
-            st.subheader('Prediction')
-            st.write(prediction)
-
-            st.subheader('Prediction Probability')
-            st.write(prediction_proba)
-
-            # Visualize prediction confidence
-            st.subheader('Prediction Confidence Visualization')
-            fig, ax = plt.subplots()
-            ax.barh(np.arange(len(prediction_proba[0])), prediction_proba[0])
-            ax.set_yticks(np.arange(len(prediction_proba[0])))
-            ax.set_yticklabels(['Class 1', 'Class 2'])
-            ax.set_xlabel('Probability')
-            ax.set_title('Prediction Confidence')
-            st.pyplot(fig)
-        except Exception as e:
-            LOGGER.error(f"Error during prediction: {e}")
-            st.error(f"An error occurred during prediction: {e}")
-    else:
-        st.error("Model is not loaded. Predictions cannot be made.")
+        st.error("Input data is not defined. Please upload a valid CSV file.")
 
 if __name__ == "__main__":
     run()
