@@ -78,7 +78,7 @@ def run():
     fig, ax = plt.subplots()
     ax.barh(np.arange(len(prediction_proba[0])), prediction_proba[0])
     ax.set_yticks(np.arange(len(prediction_proba[0])))
-    ax.set_yticklabels(['Class 1', 'Class 2', 'Class 3', 'Class 4'])
+    ax.set_yticklabels(['Class 1', 'Class 2'])
     ax.set_xlabel('Probability')
     ax.set_title('Prediction Confidence')
     st.pyplot(fig)
