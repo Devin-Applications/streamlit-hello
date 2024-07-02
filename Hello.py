@@ -119,7 +119,11 @@ def run():
         features = pd.DataFrame(data, index=[0])
         return features
 
-    input_df = pd.read_csv('/home/ubuntu/streamlit-hello/penguins_example.csv')
+    uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
+    if uploaded_file is not None:
+        input_df = pd.read_csv(uploaded_file)
+    else:
+        input_df = pd.read_csv('/home/ubuntu/streamlit-hello/penguins_example.csv')
 
     # One-hot encode categorical variables
     input_df = pd.get_dummies(input_df, columns=['island', 'sex'])
