@@ -38,7 +38,7 @@ except FileNotFoundError as e:
     st.error("Model file not found. Please ensure 'model.pkl' is present in the directory.")
 except Exception as e:
     LOGGER.error(f"Error loading model: {e}")
-    st.error("An error occurred while loading the model.")
+    st.error(f"An error occurred while loading the model: {e}")
 
 def run():
     st.write("# Predictive Analytics App 📊")
