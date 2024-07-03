@@ -37,11 +37,8 @@ def run():
     """)
 
     # Collects user input features into dataframe
-    uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
-    if uploaded_file is not None:
-        input_df = pd.read_csv(uploaded_file)
-    else:
-        input_df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'penguins_example.csv'))
+    # Automatically load the example CSV file for testing
+    input_df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'penguins_example.csv'))
 
     # Ensure 'island' and 'sex' columns exist before encoding
     if 'island' not in input_df.columns or 'sex' not in input_df.columns:
