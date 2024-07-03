@@ -61,8 +61,7 @@ def run():
 
     # Define the expected feature order based on the model's training data
     expected_feature_order = [
-        'bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g',
-        'island_Dream', 'island_Torgersen', 'sex_male'
+        'bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g'
     ]
 
     # Reorder the columns of input_df to match the expected feature order
