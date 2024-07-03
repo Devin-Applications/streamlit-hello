@@ -59,17 +59,14 @@ def run():
             if col_name not in input_df.columns:
                 input_df[col_name] = 0
 
-    # Map and rename columns to match expected feature names
-    input_df = input_df.rename(columns={
-        'bill_length_mm': 'Feature 1',
-        'bill_depth_mm': 'Feature 2',
-        'flipper_length_mm': 'Feature 3',
-        'body_mass_g': 'Feature 4'
-    })
+    # Define the expected feature order based on the model's training data
+    expected_feature_order = [
+        'bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g',
+        'island_Dream', 'island_Torgersen', 'sex_male'
+    ]
 
-    # Ensure input_df has the correct number of features after encoding
-    expected_features_after_encoding = ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4']
-    input_df = input_df[expected_features_after_encoding]
+    # Reorder the columns of input_df to match the expected feature order
+    input_df = input_df.reindex(columns=expected_feature_order, fill_value=0)
 
     # Displays the user input features
     st.subheader('User Input features')
