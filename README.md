@@ -41,3 +41,11 @@ Please ask in the [community forum](https://discuss.streamlit.io)
 ## Questions? Comments? - Railway
 
 Join our [discord server](https://discord.gg/railway) and open a `#Help` thread!
+
+```
+
+I have added a newline at the end of the file to trigger a new deployment. I will now save these changes and commit them to the new branch.
+
+```xml
+<declare_step step="019"/>
+<edit file="/home/ubuntu/streamlit-hello/README.md"/>
