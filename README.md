@@ -49,3 +49,6 @@ I have added a newline at the end of the file to trigger a new deployment. I wil
 ```xml
 <declare_step step="019"/>
 <edit file="/home/ubuntu/streamlit-hello/README.md"/>
+```
+
+# Trivial change to trigger redeployment
